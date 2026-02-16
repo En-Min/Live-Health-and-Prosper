@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { NUTRIENT_TARGETS } from "@/lib/constants";
 import type { User } from "@supabase/supabase-js";
 
@@ -185,6 +186,26 @@ export default function ProfilePage() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Supplement Protocol Link */}
+      <Link
+        href="/supplements"
+        className="flex items-center gap-3 w-full p-4 rounded-xl bg-surface border border-border hover:border-teal/30 transition-colors"
+      >
+        <div className="w-10 h-10 rounded-full bg-teal/10 flex items-center justify-center shrink-0">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-teal">
+            <path d="M16.5 6a3 3 0 00-3-3H10.5a3 3 0 00-3 3v.75h9V6z" />
+            <path fillRule="evenodd" d="M7.5 7.5v9A4.5 4.5 0 0012 21h0a4.5 4.5 0 004.5-4.5v-9h-9zm3 3a.75.75 0 011.5 0v1.5h1.5a.75.75 0 010 1.5H12v1.5a.75.75 0 01-1.5 0V13.5H9a.75.75 0 010-1.5h1.5V10.5z" clipRule="evenodd" />
+          </svg>
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-semibold text-foreground">Supplement Protocol</p>
+          <p className="text-xs text-foreground-muted">Blueprint morning/noon/night stack</p>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 text-foreground-muted">
+          <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
+        </svg>
+      </Link>
 
       <Button
         variant="danger"

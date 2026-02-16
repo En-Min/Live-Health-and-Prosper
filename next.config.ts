@@ -10,6 +10,14 @@ const withSerwist = withSerwistInit({
 const nextConfig: NextConfig = {
   // Use empty turbopack config to allow both webpack (for serwist) and turbopack
   turbopack: {},
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+    ],
+  },
 };
 
 export default withSerwist(nextConfig);

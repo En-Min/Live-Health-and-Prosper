@@ -52,7 +52,7 @@ export const recipes: Recipe[] = seedRecipes.map((sr) => {
     prep_time_minutes: sr.prep_time_minutes,
     cook_time_minutes: sr.cook_time_minutes,
     servings: sr.servings,
-    image_url: null,
+    image_url: sr.image_url ?? null,
     instructions: sr.instructions,
     science_notes: sr.science_notes,
     tags: sr.tags,

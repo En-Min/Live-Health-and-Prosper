@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { formatCalories } from "@/lib/utils";
@@ -28,6 +30,14 @@ const DIFFICULTY_COLORS: Record<string, string> = {
 
 export function RecipeCard({ recipe, className }: RecipeCardProps) {
   const totalTime = recipe.prep_time_minutes + recipe.cook_time_minutes;
+  const [imgError, setImgError] = useState(false);
+
+  const categoryEmoji =
+    recipe.category === "Smoothie" ? "🥤" :
+    recipe.category === "Breakfast" ? "🌅" :
+    recipe.category === "Lunch" ? "☀️" :
+    recipe.category === "Dinner" ? "🌙" :
+    recipe.category === "Snack" ? "⚡" : "🧪";
 
   return (
     <Link
@@ -40,20 +50,24 @@ export function RecipeCard({ recipe, className }: RecipeCardProps) {
         className
       )}
     >
-      {/* Color banner based on category */}
-      <div className={cn(
-        "h-32 flex items-center justify-center relative",
-        "bg-gradient-to-br from-surface-elevated to-surface"
-      )}>
-        <span className="text-4xl opacity-30">
-          {recipe.category === "Smoothie" ? "🥤" :
-           recipe.category === "Breakfast" ? "🌅" :
-           recipe.category === "Lunch" ? "☀️" :
-           recipe.category === "Dinner" ? "🌙" :
-           recipe.category === "Snack" ? "⚡" : "🧪"}
-        </span>
+      {/* Recipe photo */}
+      <div className="h-40 relative bg-gradient-to-br from-surface-elevated to-surface">
+        {recipe.image_url && !imgError ? (
+          <Image
+            src={recipe.image_url}
+            alt={recipe.title}
+            fill
+            sizes="(max-width: 640px) 100vw, 50vw"
+            className="object-cover"
+            onError={() => setImgError(true)}
+          />
+        ) : (
+          <div className="h-full flex items-center justify-center">
+            <span className="text-4xl opacity-30">{categoryEmoji}</span>
+          </div>
+        )}
         {recipe.is_blueprint && (
-          <div className="absolute top-2 right-2">
+          <div className="absolute top-2 right-2 z-10">
             <Badge variant="teal" className="text-[10px]">Blueprint</Badge>
           </div>
         )}

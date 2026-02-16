@@ -9,6 +9,7 @@ export interface SeedRecipe {
   prep_time_minutes: number;
   cook_time_minutes: number;
   servings: number;
+  image_url: string;
   instructions: InstructionStep[];
   science_notes: ScienceNote[];
   tags: string[];
@@ -36,6 +37,7 @@ export const seedRecipes: SeedRecipe[] = [
     prep_time_minutes: 15,
     cook_time_minutes: 45,
     servings: 1,
+    image_url: "https://images.unsplash.com/photo-1718065598390-f2a855355ea9?auto=format&fit=crop&w=800&q=80",
     instructions: [
       { step: 1, text: "Rinse black lentils and add to a pot with 2 cups of water. Bring to a boil, then simmer for 20 minutes until tender.", duration_minutes: 25 },
       { step: 2, text: "While lentils cook, chop broccoli and cauliflower into small florets. Dice mushrooms and mince garlic.", duration_minutes: 5 },
@@ -80,6 +82,7 @@ export const seedRecipes: SeedRecipe[] = [
     prep_time_minutes: 10,
     cook_time_minutes: 0,
     servings: 1,
+    image_url: "https://images.unsplash.com/photo-1504708706948-13d6cbba4062?auto=format&fit=crop&w=800&q=80",
     instructions: [
       { step: 1, text: "Grind flaxseed in a blender or spice grinder until powdered.", duration_minutes: 1 },
       { step: 2, text: "Combine ground flaxseed, chia seeds, and almond milk in a bowl. Stir well and let sit for 2 minutes to thicken.", duration_minutes: 3 },
@@ -120,6 +123,7 @@ export const seedRecipes: SeedRecipe[] = [
     prep_time_minutes: 5,
     cook_time_minutes: 0,
     servings: 1,
+    image_url: "https://images.unsplash.com/photo-1583525999977-2b928def9ab6?auto=format&fit=crop&w=800&q=80",
     instructions: [
       { step: 1, text: "Add almond milk and spinach to a high-speed blender. Blend until the greens are fully broken down.", duration_minutes: 1 },
       { step: 2, text: "Add banana, blueberries, collagen peptides, and chia seeds.", duration_minutes: 1 },
@@ -159,6 +163,7 @@ export const seedRecipes: SeedRecipe[] = [
     prep_time_minutes: 15,
     cook_time_minutes: 35,
     servings: 1,
+    image_url: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80",
     instructions: [
       { step: 1, text: "Cook quinoa: rinse, then simmer in 2x water for 15 minutes. Fluff with a fork.", duration_minutes: 20 },
       { step: 2, text: "Roast sweet potato cubes at 400°F (200°C) with olive oil and smoked paprika for 25 minutes.", duration_minutes: 25 },
@@ -199,6 +204,7 @@ export const seedRecipes: SeedRecipe[] = [
     prep_time_minutes: 5,
     cook_time_minutes: 0,
     servings: 1,
+    image_url: "https://images.unsplash.com/photo-1548807371-30dc1bbe6cb5?auto=format&fit=crop&w=800&q=80",
     instructions: [
       { step: 1, text: "Combine rolled oats, chia seeds, and almond milk in a jar or container.", duration_minutes: 1 },
       { step: 2, text: "Add a drizzle of maple syrup and a pinch of cinnamon. Stir well.", duration_minutes: 1 },
@@ -236,6 +242,7 @@ export const seedRecipes: SeedRecipe[] = [
     prep_time_minutes: 10,
     cook_time_minutes: 30,
     servings: 1,
+    image_url: "https://images.unsplash.com/photo-1615865417491-9941019fbc00?auto=format&fit=crop&w=800&q=80",
     instructions: [
       { step: 1, text: "Cook brown rice according to package directions (about 30 minutes). Add turmeric to the cooking water for golden color.", duration_minutes: 30 },
       { step: 2, text: "Toss cauliflower and carrots with olive oil, cumin, and a pinch of cayenne. Roast at 425°F (220°C) for 20 minutes.", duration_minutes: 25 },
@@ -280,6 +287,7 @@ export const seedRecipes: SeedRecipe[] = [
     prep_time_minutes: 15,
     cook_time_minutes: 0,
     servings: 8,
+    image_url: "https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=800&q=80",
     instructions: [
       { step: 1, text: "Add dates to a food processor and pulse until a sticky paste forms.", duration_minutes: 2 },
       { step: 2, text: "Add walnuts, almonds, flaxseed, and cocoa powder. Process until combined but still chunky.", duration_minutes: 2 },
@@ -319,6 +327,7 @@ export const seedRecipes: SeedRecipe[] = [
     prep_time_minutes: 10,
     cook_time_minutes: 30,
     servings: 2,
+    image_url: "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80",
     instructions: [
       { step: 1, text: "Heat olive oil in a large pot over medium heat. Sauté diced onion until translucent, about 5 minutes.", duration_minutes: 5 },
       { step: 2, text: "Add garlic, ginger, and turmeric. Cook for 1 minute until fragrant.", duration_minutes: 1 },
@@ -365,6 +374,7 @@ export const seedRecipes: SeedRecipe[] = [
     prep_time_minutes: 5,
     cook_time_minutes: 0,
     servings: 1,
+    image_url: "https://images.unsplash.com/photo-1523529733369-8c9cf7593bdc?auto=format&fit=crop&w=800&q=80",
     instructions: [
       { step: 1, text: "Add almond milk, banana, and cocoa powder to a blender.", duration_minutes: 1 },
       { step: 2, text: "Add pea protein, flaxseed, and chia seeds.", duration_minutes: 1 },
@@ -403,6 +413,7 @@ export const seedRecipes: SeedRecipe[] = [
     prep_time_minutes: 10,
     cook_time_minutes: 10,
     servings: 1,
+    image_url: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80",
     instructions: [
       { step: 1, text: "Pulse cauliflower in a food processor until it resembles rice. Set aside.", duration_minutes: 2 },
       { step: 2, text: "Heat a wok or large skillet over high heat. Add coconut oil.", duration_minutes: 1 },
@@ -447,6 +458,7 @@ export const seedRecipes: SeedRecipe[] = [
     prep_time_minutes: 5,
     cook_time_minutes: 0,
     servings: 1,
+    image_url: "https://images.unsplash.com/photo-1579722821273-0f6c7d44362f?auto=format&fit=crop&w=800&q=80",
     instructions: [
       { step: 1, text: "Add coconut milk, cooked beet, and berries to a blender.", duration_minutes: 1 },
       { step: 2, text: "Add pea protein powder, banana, and a pinch of ginger.", duration_minutes: 1 },
@@ -484,6 +496,7 @@ export const seedRecipes: SeedRecipe[] = [
     prep_time_minutes: 10,
     cook_time_minutes: 0,
     servings: 2,
+    image_url: "https://images.unsplash.com/photo-1672990675499-79ecfae4e53e?auto=format&fit=crop&w=800&q=80",
     instructions: [
       { step: 1, text: "Melt dark chocolate gently in a double boiler or microwave in 20-second intervals.", duration_minutes: 3 },
       { step: 2, text: "Add ripe avocado, melted chocolate, cocoa powder, maple syrup, and almond milk to a food processor.", duration_minutes: 1 },

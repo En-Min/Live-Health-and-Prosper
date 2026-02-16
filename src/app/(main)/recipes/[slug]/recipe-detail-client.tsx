@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { NutritionDashboard } from "@/components/recipes/nutrition-dashboard";
@@ -14,32 +16,73 @@ interface RecipeDetailClientProps {
 
 export function RecipeDetailClient({ recipe }: RecipeDetailClientProps) {
   const totalTime = recipe.prep_time_minutes + recipe.cook_time_minutes;
+  const [imgError, setImgError] = useState(false);
 
   return (
     <div className="pb-8">
-      {/* Back button */}
-      <div className="px-4 py-3">
-        <Link
-          href="/recipes"
-          className="inline-flex items-center gap-1 text-sm text-foreground-muted hover:text-foreground transition-colors min-h-[44px]"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
-            <path fillRule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clipRule="evenodd" />
-          </svg>
-          Back to recipes
-        </Link>
-      </div>
-
-      {/* Header */}
-      <div className="px-4 space-y-3">
-        <div className="flex items-start justify-between gap-3">
-          <h1 className="text-2xl font-bold text-foreground leading-tight">
-            {recipe.title}
-          </h1>
+      {/* Hero image with overlay */}
+      {recipe.image_url && !imgError ? (
+        <div className="relative h-56 sm:h-72">
+          <Image
+            src={recipe.image_url}
+            alt={recipe.title}
+            fill
+            sizes="100vw"
+            className="object-cover"
+            priority
+            onError={() => setImgError(true)}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/60 to-transparent" />
+          <div className="absolute top-3 left-4 z-10">
+            <Link
+              href="/recipes"
+              className="inline-flex items-center gap-1 text-sm text-white/80 hover:text-white transition-colors min-h-[44px]"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+                <path fillRule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clipRule="evenodd" />
+              </svg>
+              Back
+            </Link>
+          </div>
           {recipe.is_blueprint && (
-            <Badge variant="teal" className="shrink-0 mt-1">Blueprint</Badge>
+            <div className="absolute top-3 right-4 z-10">
+              <Badge variant="teal">Blueprint</Badge>
+            </div>
           )}
+          <div className="absolute bottom-4 left-4 right-4 z-10">
+            <h1 className="text-2xl font-bold text-white leading-tight drop-shadow-lg">
+              {recipe.title}
+            </h1>
+          </div>
         </div>
+      ) : (
+        <>
+          <div className="px-4 py-3">
+            <Link
+              href="/recipes"
+              className="inline-flex items-center gap-1 text-sm text-foreground-muted hover:text-foreground transition-colors min-h-[44px]"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+                <path fillRule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clipRule="evenodd" />
+              </svg>
+              Back to recipes
+            </Link>
+          </div>
+          <div className="px-4">
+            <div className="flex items-start justify-between gap-3">
+              <h1 className="text-2xl font-bold text-foreground leading-tight">
+                {recipe.title}
+              </h1>
+              {recipe.is_blueprint && (
+                <Badge variant="teal" className="shrink-0 mt-1">Blueprint</Badge>
+              )}
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* Description + stats */}
+      <div className="px-4 mt-4 space-y-3">
         <p className="text-foreground-muted font-narrative text-sm leading-relaxed">
           {recipe.description}
         </p>

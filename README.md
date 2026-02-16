@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Live Health & Prosper
+
+A mobile-first Progressive Web App for biohacking-inspired meal planning, built around Bryan Johnson's Blueprint protocol. Science-backed recipes meet a "Lab Meets Kitchen" dark UI.
+
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss)
+![PWA](https://img.shields.io/badge/PWA-Installable-5A0FC8?logo=googlechrome)
+
+---
+
+## Features
+
+**Recipe Library** — 12 Blueprint-inspired recipes with full nutrition data, step-by-step instructions, science notes with citations, and curated food photography.
+
+**Meal Planner** — Drag-and-drop weekly meal planning with dnd-kit. Blueprint Week template for quick starts. Daily and weekly nutrition tracking bars.
+
+**Grocery List** — Auto-generated from your meal plan. Grouped by grocery aisle, with check-off progress tracking and custom item support.
+
+**Daily Tracking** — Log meals by slot (breakfast/lunch/dinner/snack), view weekly nutrition charts (SVG), and track streaks.
+
+**Supplement Schedule** — Bryan Johnson's full supplement protocol organized by time of day, with dosage details and purpose descriptions.
+
+**Profile** — Calorie targets, dietary preferences, and personalized settings.
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript + React 19 |
+| Styling | Tailwind CSS v4 (`@theme inline`) |
+| Auth + DB | Supabase (PostgreSQL + RLS) |
+| PWA | Serwist v9 |
+| Drag & Drop | dnd-kit |
+| Deploy | Vercel |
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Run dev server (Turbopack)
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Production build (uses --webpack for Serwist compatibility)
+npm run build
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app runs at [http://localhost:3000](http://localhost:3000). No Supabase setup is required for local development — the app uses seed data and localStorage for all state.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Optional: Supabase
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To enable cloud auth and persistence, create a `.env.local`:
 
-## Learn More
+```env
+NEXT_PUBLIC_SUPABASE_URL=your-project-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+```
 
-To learn more about Next.js, take a look at the following resources:
+Database migrations are in `supabase/migrations/`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/
+│   ├── (auth)/          # Public pages (login/signup)
+│   ├── (main)/          # Authenticated shell (Header + BottomNav)
+│   │   ├── recipes/     # Recipe library + detail pages
+│   │   ├── meal-plan/   # Weekly drag-and-drop planner
+│   │   ├── grocery-list/ # Auto-generated grocery list
+│   │   ├── tracking/    # Daily meal logging + charts
+│   │   ├── supplements/ # Supplement schedule
+│   │   └── profile/     # User preferences
+│   └── sw.ts            # Service worker (Serwist)
+├── components/
+│   ├── ui/              # Design system (Badge, Card, Button, etc.)
+│   ├── recipes/         # RecipeCard, NutritionDashboard, ScienceCard
+│   ├── meal-plan/       # WeekCalendar, DayColumn, MealSlot
+│   ├── grocery/         # GrocerySection, GroceryItem, GroceryProgress
+│   ├── tracking/        # MealLogEntry, WeeklyNutritionChart, StreakCounter
+│   └── layout/          # Header, BottomNav
+├── data/seed/           # 12 recipes, 50 ingredients, supplements
+├── hooks/               # Custom React hooks (use-recipes, use-grocery-list, etc.)
+├── lib/                 # Utilities, Supabase client, constants
+└── types/               # TypeScript interfaces
+```
 
-## Deploy on Vercel
+## Design
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Dark theme with a laboratory-meets-kitchen aesthetic:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Navy** `#0f172a` background, **Charcoal** `#1e293b` surfaces
+- **Teal** `#14b8a6` primary accent, **Amber** `#f59e0b` secondary
+- Monospace numbers (`.font-data`), serif recipe text (`.font-narrative`)
+- 44px minimum touch targets for mobile
+
+## Local Storage
+
+All client state persists across sessions without requiring a backend:
+
+| Key | Data |
+|-----|------|
+| `lhp-meal-plans` | Meal plan entries keyed by week |
+| `lhp-grocery-list` | Grocery list items |
+| `lhp-tracking` | Tracking logs keyed by date |
+| `lhp-preferences` | Calorie target + dietary preferences |
+
+## License
+
+MIT
